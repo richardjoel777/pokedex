@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { Main } from "./components/Main";
 import NavBar from "./components/navBar";
 import { Pokedex, IContext } from "./interfaces/types";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { PokemonInfo } from "./components/PokemonInfo";
 
 // const PokemonsContext = createContext(t1);
@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter>
+      <HashRouter>
         <NavBar></NavBar>
         <pokemonContext.Provider
           value={{
@@ -66,11 +66,11 @@ function App() {
           }}
         >
           <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route path="/p/:id" element={<PokemonInfo />}></Route>
+            <Route path="/pokedex" element={<Main />}></Route>
+            <Route path="/pokedex/p/:id" element={<PokemonInfo />}></Route>
           </Routes>
         </pokemonContext.Provider>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
