@@ -83,27 +83,73 @@ const types = [
   },
 ];
 
-var colors: { [key: string]: string } = {
-  normal: "white",
-  fighting: "orange",
-  flying: "light_blue",
-  poison: "pink",
-  ground: "light_yellow",
-  rock: "brown",
-  bug: "dark_green",
-  ghost: "purple",
-  steel: "pale_blue",
-  fire: "orange",
-  water: "thick_blue",
-  grass: "light_green",
-  electric: "light_yellow",
-  psychic: "pink",
-  ice: "light_blue",
-  dragon: "blue",
-  dark: "light_brown",
-  fairy: "light_pink",
-  unknown: "rose",
-  shadow: "sdw",
+var bgColors: { [key: string]: string } = {
+  normal: "bg-white",
+  fighting: "bg-orange",
+  flying: "bg-light_blue",
+  poison: "bg-pink",
+  ground: "bg-light_yellow",
+  rock: "bg-brown",
+  bug: "bg-dark_green",
+  ghost: "bg-purple",
+  steel: "bg-pale_blue",
+  fire: "bg-orange",
+  water: "bg-thick_blue",
+  grass: "bg-light_green",
+  electric: "bg-light_yellow",
+  psychic: "bg-pink",
+  ice: "bg-light_blue",
+  dragon: "bg-blue",
+  dark: "bg-light_brown",
+  fairy: "bg-light_pink",
+  unknown: "bg-rose",
+  shadow: "bg-sdw",
+};
+
+var textColors: { [key: string]: string } = {
+  normal: "text-white",
+  fighting: "text-orange",
+  flying: "text-light_blue",
+  poison: "text-pink",
+  ground: "text-light_yellow",
+  rock: "text-brown",
+  bug: "text-dark_green",
+  ghost: "text-purple",
+  steel: "text-pale_blue",
+  fire: "text-orange",
+  water: "text-thick_blue",
+  grass: "text-light_green",
+  electric: "text-light_yellow",
+  psychic: "text-pink",
+  ice: "text-light_blue",
+  dragon: "text-blue",
+  dark: "text-light_brown",
+  fairy: "text-light_pink",
+  unknown: "text-rose",
+  shadow: "text-sdw",
+};
+
+var borderColors: { [key: string]: string } = {
+  normal: "border-white",
+  fighting: "border-orange",
+  flying: "border-light_blue",
+  poison: "border-pink",
+  ground: "border-light_yellow",
+  rock: "border-brown",
+  bug: "border-dark_green",
+  ghost: "border-purple",
+  steel: "border-pale_blue",
+  fire: "border-orange",
+  water: "border-thick_blue",
+  grass: "border-light_green",
+  electric: "border-light_yellow",
+  psychic: "border-pink",
+  ice: "border-light_blue",
+  dragon: "border-blue",
+  dark: "border-light_brown",
+  fairy: "border-light_pink",
+  unknown: "border-rose",
+  shadow: "border-sdw",
 };
 
 export const Type = () => {
@@ -116,7 +162,9 @@ export const Type = () => {
         {types.map((type) => (
           <TypeItem
             key={type.name}
-            color={colors[type.name]}
+            bgColor={bgColors[type.name]}
+            textColor={textColors[type.name]}
+            borderColor={borderColors[type.name]}
             text={type.name}
           ></TypeItem>
         ))}

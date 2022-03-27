@@ -4,7 +4,9 @@ import { IContext } from "../interfaces/types";
 import { useState } from "react";
 
 type Iprops = {
-  color: string;
+  bgColor: string;
+  borderColor: string;
+  textColor: string;
   text: string;
 };
 
@@ -30,10 +32,10 @@ export const TypeItem = (props: Iprops) => {
             }
           : () => {}
       }
-      className={`text-center capitalize select-none text-lg border-2  border-${
-        props.color
+      className={`text-center capitalize select-none text-lg border-2  ${
+        props.borderColor
       } py-1 rounded-3xl ${
-        selected ? `text-black bg-${props.color}` : `text-${props.color}`
+        selected ? `text-black ${props.bgColor}` : `${props.textColor}`
       } cursor-pointer`}
     >
       {props.text}

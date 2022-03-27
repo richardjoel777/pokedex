@@ -5,28 +5,29 @@ import { Pokedex } from "../interfaces/types";
 import CardTypeItem from "./CardTypeItem";
 import { PokeImage } from "./PokeImage";
 
-var colors: { [key: string]: string } = {
-  normal: "white",
-  fighting: "orange",
-  flying: "light_blue",
-  poison: "pink",
-  ground: "light_yellow",
-  rock: "brown",
-  bug: "dark_green",
-  ghost: "purple",
-  steel: "pale_blue",
-  fire: "orange",
-  water: "thick_blue",
-  grass: "light_green",
-  electric: "light_yellow",
-  psychic: "pink",
-  ice: "light_blue",
-  dragon: "blue",
-  dark: "light_brown",
-  fairy: "light_pink",
-  unknown: "rose",
-  shadow: "shadow",
+var bgColors: { [key: string]: string } = {
+  normal: "bg-white",
+  fighting: "bg-orange",
+  flying: "bg-light_blue",
+  poison: "bg-pink",
+  ground: "bg-light_yellow",
+  rock: "bg-brown",
+  bug: "bg-dark_green",
+  ghost: "bg-purple",
+  steel: "bg-pale_blue",
+  fire: "bg-orange",
+  water: "bg-thick_blue",
+  grass: "bg-light_green",
+  electric: "bg-light_yellow",
+  psychic: "bg-pink",
+  ice: "bg-light_blue",
+  dragon: "bg-blue",
+  dark: "bg-light_brown",
+  fairy: "bg-light_pink",
+  unknown: "bg-rose",
+  shadow: "bg-sdw",
 };
+
 
 export const PokemonInfo = () => {
   const { id } = useParams();
@@ -160,7 +161,7 @@ export const PokemonInfo = () => {
                 {pokemon.types.map((type) => (
                   <CardTypeItem
                     key={type.type.name}
-                    color={colors[type.type.name]}
+                    color={bgColors[type.type.name]}
                     text={type.type.name}
                   ></CardTypeItem>
                 ))}
