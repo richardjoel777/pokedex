@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import leftArrow from "../assets/la.svg";
 import { Pokedex } from "../interfaces/types";
 import CardTypeItem from "./CardTypeItem";
 import { PokeImage } from "./PokeImage";
@@ -27,7 +26,6 @@ var bgColors: { [key: string]: string } = {
   unknown: "bg-rose",
   shadow: "bg-sdw",
 };
-
 
 export const PokemonInfo = () => {
   const { id } = useParams();

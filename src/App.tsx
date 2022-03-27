@@ -13,6 +13,7 @@ function App() {
   const [pokemonData, setpokemonData] = useState<Pokedex[]>([]);
   const [loadedData, setLoadedData] = useState<Pokedex[]>([]);
   const [pokeCount, setPokeCount] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     types: new Set<String>(),
     ability: "all",
@@ -36,6 +37,7 @@ function App() {
       setpokemonData([...temp]);
       setPokeCount((prevState) => prevState + 20);
       setLoadedData([...temp]);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -63,6 +65,7 @@ function App() {
           pokemonData: [pokemonData, setpokemonData],
           pokeCount: [pokeCount, setPokeCount],
           filters: [filters, setFilters],
+          isLoading: [isLoading, setIsLoading],
         }}
       >
         <Routes>

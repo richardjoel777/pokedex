@@ -170,4 +170,5 @@ export interface IContext {
   pokemonData: [Pokedex[], React.Dispatch<React.SetStateAction<Pokedex[]>>];
   pokeCount: [number, React.Dispatch<React.SetStateAction<number>>];
   filters: [IFilters, React.Dispatch<React.SetStateAction<IFilters>>];
+  isLoading: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 }
