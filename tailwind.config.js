@@ -35,6 +35,7 @@ module.exports = {
         pokedex_bg: "url(./assets/pokedex_bg.png)",
         pokemon_circle: "url(./assets/pokemon_circle_bg.png)",
         pokeCard: "url(./assets/card-bg.png)",
+        notFound: "url(./assets/404.png)",
       },
       boxShadow: {
         blue: "#58b9d6 3px 3px 3px 3px",

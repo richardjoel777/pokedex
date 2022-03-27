@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import leftArrow from "../assets/la.svg";
 import { Pokedex } from "../interfaces/types";
 import CardTypeItem from "./CardTypeItem";
@@ -30,6 +30,7 @@ var colors: { [key: string]: string } = {
 
 export const PokemonInfo = () => {
   const { id } = useParams();
+  const nav = useNavigate();
   const [pokemon, setPokemon] = useState({} as Pokedex);
   const [prevPokemon, setPrevPokemon] = useState({} as Pokedex);
   const [nextPokemon, setNextPokemon] = useState({} as Pokedex);
@@ -52,6 +53,16 @@ export const PokemonInfo = () => {
         var nextData = await response.json();
         setNextPokemon(nextData);
       }
+    }
+    let notfound = false;
+    if (parseInt(id as string) < 1 || parseInt(id as string) > 898) {
+      notfound = true;
+    }
+    const goToNF = () => {
+      nav("/404");
+    };
+    if (notfound) {
+      goToNF();
     }
     fetchData();
   }, [id]);

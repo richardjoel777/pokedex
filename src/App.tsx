@@ -4,6 +4,7 @@ import NavBar from "./components/navBar";
 import { Pokedex, IContext } from "./interfaces/types";
 import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { PokemonInfo } from "./components/PokemonInfo";
+import { NotFound } from "./components/NotFound";
 
 // const PokemonsContext = createContext(t1);
 export const pokemonContext = createContext({} as IContext);
@@ -55,22 +56,21 @@ function App() {
 
   return (
     <div>
-      <HashRouter>
-        <NavBar></NavBar>
-        <pokemonContext.Provider
-          value={{
-            loadedData: [loadedData, setLoadedData],
-            pokemonData: [pokemonData, setpokemonData],
-            pokeCount: [pokeCount, setPokeCount],
-            filters: [filters, setFilters],
-          }}
-        >
-          <Routes>
-            <Route path="/pokedex" element={<Main />}></Route>
-            <Route path="/pokedex/p/:id" element={<PokemonInfo />}></Route>
-          </Routes>
-        </pokemonContext.Provider>
-      </HashRouter>
+      <NavBar></NavBar>
+      <pokemonContext.Provider
+        value={{
+          loadedData: [loadedData, setLoadedData],
+          pokemonData: [pokemonData, setpokemonData],
+          pokeCount: [pokeCount, setPokeCount],
+          filters: [filters, setFilters],
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/p/:id" element={<PokemonInfo />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </pokemonContext.Provider>
     </div>
   );
 }
