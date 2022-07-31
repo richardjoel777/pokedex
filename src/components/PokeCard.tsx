@@ -54,9 +54,9 @@ export default function PokeCard(props: Iprops) {
           <div className="grid gap-3 grid-cols-2">
             {pokemon.types.map((type) => (
               <CardTypeItem
-                key={type.type.name}
-                color={colors[type.type.name]}
-                text={type.type.name}
+                key={type.name}
+                color={colors[type.name]}
+                text={type.name}
               ></CardTypeItem>
             ))}
             {/* <CardTypeItem color="thick_blue" text={pokemon.ty}></CardTypeItem>

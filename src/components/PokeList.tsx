@@ -8,19 +8,22 @@ function PokeList() {
   const data: IContext = useContext(pokemonContext);
   return (
     <div>
-      {!data.isLoading[0] ? (
+      {/* {!data.isLoading[0] ? (
         <div className="grid w-11/12 mx-auto h-auto grid-cols-4 gap-4">
-          {data.loadedData[0].map((pokemon, index) => {
-            if (index < data.pokeCount[0]) {
-              return <PokeCard pokemon={pokemon}></PokeCard>;
-            }
-          })}
+          {data.pokemonData[0].map((pokemon, index) => (
+            <PokeCard pokemon={pokemon}></PokeCard>
+          ))}
         </div>
       ) : (
         <div className="flex justify-center">
           <CircularProgress />
         </div>
-      )}
+      )} */}
+      <div className="grid w-11/12 mx-auto h-auto grid-cols-4 gap-4">
+        {data.pokemonData[0].map((pokemon, index) => (
+          <PokeCard pokemon={pokemon}></PokeCard>
+        ))}
+      </div>
     </div>
     // <div className="grid w-11/12 mx-auto h-auto grid-cols-4 gap-4">
     //   {data.loadedData != undefined ? (

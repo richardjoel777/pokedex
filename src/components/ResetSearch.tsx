@@ -6,28 +6,8 @@ import { IContext } from "../interfaces/types";
 const ResetSearch = () => {
   const pokeContext: IContext = useContext(pokemonContext);
 
-  function filterPokemons() {
-    var filters = pokeContext.filters[0];
-    var filteredData = pokeContext.pokemonData[0].filter((p) => {
-      var typeFilter = filters.types.size === 0;
-      var abilityFilter = filters.ability === "all";
-      if (filters.types.size !== 0) {
-        p.types.forEach((type) => {
-          if (filters.types.has(type.type.name)) typeFilter = true;
-        });
-      }
-      if (filters.ability !== "all") {
-        p.abilities.forEach((ability) => {
-          if (filters.ability === ability.ability.name) abilityFilter = true;
-        });
-      }
-
-      var rangeFilter = p.id >= filters.regMin && p.id <= filters.regMax;
-
-      return abilityFilter && typeFilter && rangeFilter;
-    });
-    pokeContext.loadedData[1](filteredData.slice(0));
-    pokeContext.pokeCount[1](20);
+  async function filterPokemons() {
+    await pokeContext.fetchData();
   }
 
   function resetFilters() {
@@ -35,18 +15,20 @@ const ResetSearch = () => {
       types: new Set<String>(),
       ability: "all",
       regMin: 1,
-      regMax: 897,
+      regMax: 900,
+      offset: 0,
+      search: "",
     });
   }
 
   return (
     <div className="w-full flex justify-between space-x-12">
-      {/* <div
+      <div
         onClick={resetFilters}
         className="w-1/3 cursor-pointer text-light_blue text-lg text-center self-stretch border-2 rounded-full border-light_blue py-2"
       >
         Reset
-      </div> */}
+      </div>
       <div className="w-1/3 mx-auto cursor-pointer flex bg-light_blue rounded-full">
         <div
           className="py-1 text-lg w-1/2 flex justify-end items-center"

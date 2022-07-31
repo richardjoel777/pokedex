@@ -36,18 +36,18 @@ export const PokemonInfo = () => {
 
   useEffect(() => {
     async function fetchData() {
-      var url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+      var url = `http://127.0.0.1:8000/${id}`;
       var response = await fetch(url);
       var data: Pokedex = await response.json();
       setPokemon(data);
       if (parseInt(id as string) - 1 > 0) {
-        url = `https://pokeapi.co/api/v2/pokemon/${parseInt(id as string) - 1}`;
+        url = `http://127.0.0.1:8000/${parseInt(id as string) - 1}`;
         response = await fetch(url);
         var prevData = await response.json();
         setPrevPokemon(prevData);
       }
       if (parseInt(id as string) + 1 < 899) {
-        url = `https://pokeapi.co/api/v2/pokemon/${parseInt(id as string) + 1}`;
+        url = `http://127.0.0.1:8000/${parseInt(id as string) + 1}`;
         response = await fetch(url);
         var nextData = await response.json();
         setNextPokemon(nextData);
@@ -158,9 +158,9 @@ export const PokemonInfo = () => {
               <div className="w-1/2 mx-auto grid gap-2 grid-cols-2">
                 {pokemon.types.map((type) => (
                   <CardTypeItem
-                    key={type.type.name}
-                    color={bgColors[type.type.name]}
-                    text={type.type.name}
+                    key={type.name}
+                    color={bgColors[type.name]}
+                    text={type.name}
                   ></CardTypeItem>
                 ))}
               </div>
@@ -182,7 +182,7 @@ export const PokemonInfo = () => {
                 <div className="w-1/2 text-lg text-light_blue">Abililty</div>
                 <div className="w-1/2 text-lg flex flex-col">
                   {pokemon.abilities.map((ability) => (
-                    <div>{ability.ability.name.replaceAll("-", " ")}</div>
+                    <div>{ability.name.replaceAll("-", " ")}</div>
                   ))}
                 </div>
               </div>

@@ -8,38 +8,11 @@ export const PokeSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   function shufflePokemons() {
-    // console.log("hello");
-    data.loadedData[1]((_) => {
-      var array = data.pokemonData[0];
-      let currentIndex = array.length,
-        randomIndex;
-
-      // While there remain elements to shuffle...
-      while (currentIndex != 0) {
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex],
-          array[currentIndex],
-        ];
-      }
-      console.log(array);
-      return [...array];
-    });
-    // console.log(data.pokemonData[0]);
+    data.fetchData(true);
   }
 
-  function searchPokemons() {
-    console.log("here");
-    console.log(searchTerm);
-    data.loadedData[1]([
-      ...data.pokemonData[0].filter((p) =>
-        p.name.startsWith(searchTerm.toLowerCase())
-      ),
-    ]);
+  async function searchPokemons() {
+    await data.fetchData();
   }
 
   return (
@@ -52,11 +25,16 @@ export const PokeSearch = () => {
           <input
             type="text"
             className=" w-10/12 appearance-none rounded-l-full pl-7"
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              data.filters[1]((prev) => {
+                return { ...prev, search: searchTerm };
+              });
+            }}
           />
           <button
             className="h-14 p-2 w-1/12 bg-light_blue rounded-r-full flex justify-center"
-            onClick={data.pokemonData != undefined ? searchPokemons : () => {}}
+            onClick={searchPokemons}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +54,7 @@ export const PokeSearch = () => {
         </div>
       </div>
       <div
-        onClick={data.pokemonData != undefined ? shufflePokemons : () => {}}
+        onClick={shufflePokemons}
         className="h-14 cursor-pointer rounded-full mt-12 text-center text-xl bg-yellow-300 text-white w-1/3 border-2 flex justify-center items-center space-x-8"
       >
         <div>Surprise me!</div>

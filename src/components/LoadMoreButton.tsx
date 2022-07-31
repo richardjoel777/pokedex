@@ -7,15 +7,12 @@ export default function LoadMoreButton() {
 
   return (
     <div
-      className=" w-2/5 h-auto mx-auto text-lg text-center py-3 cursor-pointer hover:bg-light_blue hover:text-black rounded-full border-2 border-light_blue text-shadow"
-      onClick={
-        data.pokeCount == undefined
-          ? () => {}
-          : () => {
-              console.log("Hey");
-              data.pokeCount[1]((prevState) => prevState + 20);
-            }
-      }
+      className={`w-2/5 h-auto mx-auto text-lg text-center py-3 cursor-pointer hover:bg-light_blue hover:text-black rounded-full border-2 border-light_blue text-shadow`}
+      hidden={data.isMax[0]}
+      onClick={() => {
+        console.log("Hey");
+        data.fetchData(false, false);
+      }}
     >
       Load More Pokémon
     </div>

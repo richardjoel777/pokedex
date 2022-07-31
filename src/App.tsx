@@ -11,44 +11,63 @@ export const pokemonContext = createContext({} as IContext);
 
 function App() {
   const [pokemonData, setpokemonData] = useState<Pokedex[]>([]);
-  const [loadedData, setLoadedData] = useState<Pokedex[]>([]);
-  const [pokeCount, setPokeCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMax, setIsMax] = useState(false);
   const [filters, setFilters] = useState({
     types: new Set<String>(),
     ability: "all",
     regMin: 1,
-    regMax: 897,
+    regMax: 900,
+    offset: 0,
+    search: "",
   });
 
-  useEffect(() => {
-    async function fetchData() {
-      const url: string = "https://pokeapi.co/api/v2/pokemon/?limit=897";
-      var temp: Pokedex[] = [];
-      var response = await fetch(url);
-      var data = await response.json();
-      var l: { name: string; url: string }[] = data.results;
-      for (var item of l) {
-        var pokemon = await fetch(item.url);
-        var responseData: Pokedex = await pokemon.json();
-        temp.push(responseData);
-      }
-      console.log(temp);
-      setpokemonData([...temp]);
-      setPokeCount((prevState) => prevState + 20);
-      setLoadedData([...temp]);
-      setIsLoading(false);
+  async function fetchData(
+    isShuffle: boolean = false,
+    isFilterChanged: boolean = true
+  ) {
+    // setIsLoading(true);
+
+    let url: string = "http://127.0.0.1:8000/?";
+    if (filters.ability !== "all") {
+      url += `abilities=${filters.ability}&`;
     }
+    if (filters.types.size > 0) {
+      url += `types=${[...Array.from(filters.types)].join(",")}&`;
+    }
+    if (filters.search !== "") {
+      url += `search=${filters.search}&`;
+    }
+    url += `min=${filters.regMin}&`;
+    url += `max=${filters.regMax}&`;
+    setFilters({ ...filters, offset: filters.offset + 20 });
+    url += `offset=${isFilterChanged ? 20 : filters.offset + 20}`;
+
+    if (isShuffle) {
+      url += "&shuffle=true";
+    }
+
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(response);
+    console.log(data);
+
+    if (isFilterChanged) {
+      setpokemonData(data["results"]);
+    } else {
+      setpokemonData((prev) => [...prev, ...data["results"]]);
+    }
+    setIsLoading(false);
+    setIsMax(data["isMax"]);
+  }
+
+  useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
     console.log("Filters", filters);
   }, [filters]);
-
-  useEffect(() => {
-    console.log("LoadedData", loadedData);
-  }, [loadedData]);
 
   // useEffect(() => {
   //   console.log("hey");
@@ -61,11 +80,11 @@ function App() {
       <NavBar></NavBar>
       <pokemonContext.Provider
         value={{
-          loadedData: [loadedData, setLoadedData],
           pokemonData: [pokemonData, setpokemonData],
-          pokeCount: [pokeCount, setPokeCount],
+          isMax: [isMax, setIsMax],
           filters: [filters, setFilters],
           isLoading: [isLoading, setIsLoading],
+          fetchData: fetchData,
         }}
       >
         <Routes>
