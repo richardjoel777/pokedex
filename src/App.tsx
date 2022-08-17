@@ -12,21 +12,35 @@ export const pokemonContext = createContext({} as IContext);
 function App() {
   const [pokemonData, setpokemonData] = useState<Pokedex[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isShuffle, setIsShuffle] = useState(false);
   const [isMax, setIsMax] = useState(false);
   const [filters, setFilters] = useState({
     types: new Set<String>(),
     ability: "all",
     regMin: 1,
-    regMax: 900,
+    regMax: 905,
     offset: 0,
     search: "",
   });
 
+  function resetFilters() {
+    setFilters({
+      types: new Set<String>(),
+      ability: "all",
+      regMin: 1,
+      regMax: 900,
+      offset: 0,
+      search: "",
+    });
+  }
+
   async function fetchData(
-    isShuffle: boolean = false,
+    isShuffle1: boolean = false,
     isFilterChanged: boolean = true
   ) {
-    // setIsLoading(true);
+    setIsLoading(true);
+
+    console.log("Is Shuffle ", isShuffle);
 
     let url: string = "http://127.0.0.1:8000/?";
     if (filters.ability !== "all") {
@@ -43,7 +57,7 @@ function App() {
     setFilters({ ...filters, offset: filters.offset + 20 });
     url += `offset=${isFilterChanged ? 20 : filters.offset + 20}`;
 
-    if (isShuffle) {
+    if (isShuffle1 || isShuffle) {
       url += "&shuffle=true";
     }
 
@@ -66,8 +80,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("Filters", filters);
-  }, [filters]);
+    setIsShuffle(false);
+  }, [filters.ability, filters.regMin, filters.regMax, filters.search]);
 
   // useEffect(() => {
   //   console.log("hey");
@@ -84,6 +98,7 @@ function App() {
           isMax: [isMax, setIsMax],
           filters: [filters, setFilters],
           isLoading: [isLoading, setIsLoading],
+          isShuffle: [isShuffle, setIsShuffle],
           fetchData: fetchData,
         }}
       >

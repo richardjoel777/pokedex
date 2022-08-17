@@ -24,6 +24,11 @@ function PokeList() {
           <PokeCard pokemon={pokemon}></PokeCard>
         ))}
       </div>
+      {data.isLoading[0] == true && (
+        <div className="flex justify-center">
+          <CircularProgress />
+        </div>
+      )}
     </div>
     // <div className="grid w-11/12 mx-auto h-auto grid-cols-4 gap-4">
     //   {data.loadedData != undefined ? (

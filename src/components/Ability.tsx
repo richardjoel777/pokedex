@@ -1,93 +1,30 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { pokemonContext } from "../App";
-import { IContext } from "../interfaces/types";
-
-const abilities = [
-  {
-    name: "stench",
-    url: "https://pokeapi.co/api/v2/ability/1/",
-  },
-  {
-    name: "drizzle",
-    url: "https://pokeapi.co/api/v2/ability/2/",
-  },
-  {
-    name: "speed-boost",
-    url: "https://pokeapi.co/api/v2/ability/3/",
-  },
-  {
-    name: "battle-armor",
-    url: "https://pokeapi.co/api/v2/ability/4/",
-  },
-  {
-    name: "sturdy",
-    url: "https://pokeapi.co/api/v2/ability/5/",
-  },
-  {
-    name: "damp",
-    url: "https://pokeapi.co/api/v2/ability/6/",
-  },
-  {
-    name: "limber",
-    url: "https://pokeapi.co/api/v2/ability/7/",
-  },
-  {
-    name: "sand-veil",
-    url: "https://pokeapi.co/api/v2/ability/8/",
-  },
-  {
-    name: "static",
-    url: "https://pokeapi.co/api/v2/ability/9/",
-  },
-  {
-    name: "volt-absorb",
-    url: "https://pokeapi.co/api/v2/ability/10/",
-  },
-  {
-    name: "water-absorb",
-    url: "https://pokeapi.co/api/v2/ability/11/",
-  },
-  {
-    name: "oblivious",
-    url: "https://pokeapi.co/api/v2/ability/12/",
-  },
-  {
-    name: "cloud-nine",
-    url: "https://pokeapi.co/api/v2/ability/13/",
-  },
-  {
-    name: "compound-eyes",
-    url: "https://pokeapi.co/api/v2/ability/14/",
-  },
-  {
-    name: "insomnia",
-    url: "https://pokeapi.co/api/v2/ability/15/",
-  },
-  {
-    name: "color-change",
-    url: "https://pokeapi.co/api/v2/ability/16/",
-  },
-  {
-    name: "immunity",
-    url: "https://pokeapi.co/api/v2/ability/17/",
-  },
-  {
-    name: "flash-fire",
-    url: "https://pokeapi.co/api/v2/ability/18/",
-  },
-  {
-    name: "shield-dust",
-    url: "https://pokeapi.co/api/v2/ability/19/",
-  },
-  {
-    name: "own-tempo",
-    url: "https://pokeapi.co/api/v2/ability/20/",
-  },
-];
+import { IContext, Ability as IAbility } from "../interfaces/types";
 
 export const Ability = () => {
   const [ability, setAbility] = useState("all");
   const pokeContext: IContext = useContext(pokemonContext);
+  const [abilities, setAbilities] = useState<IAbility[]>([]);
+
+  async function fetchData() {
+    const url = `http://127.0.0.1:8000/abilities/`;
+
+    var res = await fetch(url);
+    console.log(res);
+    var data = await res.json();
+    console.log(data);
+    setAbilities(data);
+  }
+
+  useEffect(() => {
+    setAbility(pokeContext.filters[0].ability);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setAbility(pokeContext.filters[0].ability);
+  }, [pokeContext.filters[0].ability]);
 
   const onChange = (newValue: string) => {
     setAbility(newValue);

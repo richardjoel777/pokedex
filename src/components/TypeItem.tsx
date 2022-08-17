@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { pokemonContext } from "../App";
 import { IContext } from "../interfaces/types";
 import { useState } from "react";
@@ -13,6 +13,15 @@ type Iprops = {
 export const TypeItem = (props: Iprops) => {
   const [selected, setselected] = useState(false);
   const pokeContext: IContext = useContext(pokemonContext);
+
+  useEffect(() => {
+    setselected(pokeContext.filters[0].types.has(props.text));
+  }, []);
+
+  useEffect(() => {
+    setselected(pokeContext.filters[0].types.has(props.text));
+  }, [pokeContext.filters[0].types]);
+
   return (
     <div
       onClick={

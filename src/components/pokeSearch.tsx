@@ -5,13 +5,15 @@ import { IContext } from "../interfaces/types";
 
 export const PokeSearch = () => {
   const data: IContext = useContext(pokemonContext);
-  const [searchTerm, setSearchTerm] = useState("");
 
   function shufflePokemons() {
-    data.fetchData(true);
+    data.isShuffle[1](true);
+    console.log("here...");
+    data.fetchData(true, false);
   }
 
   async function searchPokemons() {
+    data.isShuffle[1](false);
     await data.fetchData();
   }
 
@@ -26,9 +28,8 @@ export const PokeSearch = () => {
             type="text"
             className=" w-10/12 appearance-none rounded-l-full pl-7"
             onChange={(e) => {
-              setSearchTerm(e.target.value);
               data.filters[1]((prev) => {
-                return { ...prev, search: searchTerm };
+                return { ...prev, search: e.target.value };
               });
             }}
           />
