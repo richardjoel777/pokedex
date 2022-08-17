@@ -23,17 +23,6 @@ function App() {
     search: "",
   });
 
-  function resetFilters() {
-    setFilters({
-      types: new Set<String>(),
-      ability: "all",
-      regMin: 1,
-      regMax: 900,
-      offset: 0,
-      search: "",
-    });
-  }
-
   async function fetchData(
     isShuffle1: boolean = false,
     isFilterChanged: boolean = true
