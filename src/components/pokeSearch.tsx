@@ -20,13 +20,11 @@ export const PokeSearch = () => {
   return (
     <div className="mt-6 h-auto w-11/12 mx-auto shadow-blue rounded-lg border-2 border-text_primary flex justify-around align-middle px-14 py-6 space-x-4 bg-dark_blue bg-opacity-50">
       <div className="h-36 w-2/3 flex flex-col">
-        <h4 className="h-10 mb-2 text-xl text-shadow">
-          Search by name or number
-        </h4>
+        <h4 className="h-10 mb-2 text-xl text-shadow">Search by name</h4>
         <div className="flex space-x-0">
           <input
             type="text"
-            className=" w-10/12 appearance-none rounded-l-full pl-7"
+            className=" w-full appearance-none rounded-l-full pl-7"
             onChange={(e) => {
               data.filters[1]((prev) => {
                 return { ...prev, search: e.target.value };
@@ -54,13 +52,13 @@ export const PokeSearch = () => {
           </button>
         </div>
       </div>
-      <div
+      {/* <div
         onClick={shufflePokemons}
         className="h-14 cursor-pointer rounded-full mt-12 text-center text-xl bg-yellow-300 text-white w-1/3 border-2 flex justify-center items-center space-x-8"
       >
         <div>Surprise me!</div>
         <img src={shuffleArrow} className="h-6 w-6" />
-      </div>
+      </div> */}
     </div>
   );
 };
