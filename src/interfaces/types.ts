@@ -33,6 +33,5 @@ export interface IContext {
   filters: [IFilters, React.Dispatch<React.SetStateAction<IFilters>>];
   isLoading: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
   isMax: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-  isShuffle: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-  fetchData: (isShuffle?: boolean, isFilterChanged?: boolean) => Promise<void>;
+  fetchData: (isFilterChanged?: boolean) => Promise<void>;
 }

@@ -6,14 +6,7 @@ import { IContext } from "../interfaces/types";
 export const PokeSearch = () => {
   const data: IContext = useContext(pokemonContext);
 
-  function shufflePokemons() {
-    data.isShuffle[1](true);
-    console.log("here...");
-    data.fetchData(true, false);
-  }
-
   async function searchPokemons() {
-    data.isShuffle[1](false);
     await data.fetchData();
   }
 
@@ -52,13 +45,6 @@ export const PokeSearch = () => {
           </button>
         </div>
       </div>
-      {/* <div
-        onClick={shufflePokemons}
-        className="h-14 cursor-pointer rounded-full mt-12 text-center text-xl bg-yellow-300 text-white w-1/3 border-2 flex justify-center items-center space-x-8"
-      >
-        <div>Surprise me!</div>
-        <img src={shuffleArrow} className="h-6 w-6" />
-      </div> */}
     </div>
   );
 };

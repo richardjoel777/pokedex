@@ -11,7 +11,7 @@ export default function LoadMoreButton() {
       hidden={data.isMax[0]}
       onClick={() => {
         console.log("Hey");
-        data.fetchData(false, false);
+        data.fetchData(false);
       }}
     >
       Load More Pokémon

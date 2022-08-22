@@ -7,7 +7,6 @@ const ResetSearch = () => {
   const pokeContext: IContext = useContext(pokemonContext);
 
   async function filterPokemons() {
-    pokeContext.isShuffle[1](false);
     await pokeContext.fetchData();
   }
 
